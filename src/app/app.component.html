@@ -20,15 +20,14 @@
           <!-- Quiz Answers -->
           <div class="col-8 offset-2">
             <div class="row">
-              <div class="col-6 mb-3 quiz-answer"
-              [class.selected]="item.key == '1'"
-              *ngFor="let item of answers | keyvalue">
-                <div class="card">
+              <div class="col-6 mb-3 quiz-answer" [class.selected]="item.key == '1'"
+                *ngFor="let item of answers | keyvalue">
+                <div class="card" [class.shadow]="item.key == '1'">
                   <div class="card-body d-flex flex-nowrap align-items-center">
                     <div class="quiz-answer__number">
                       {{ item.key }}
                     </div>
-                    <div class="quiz-answer__text" >
+                    <div class="quiz-answer__text">
                       {{ item.value }}
                     </div>
                   </div>
