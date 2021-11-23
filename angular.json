@@ -103,6 +103,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "quiz:build:production",
+            "firebaseProject": "bit-quiz-angular",
+            "firebaseHostingSite": "bit-quiz-angular"
+          }
         }
       }
     }

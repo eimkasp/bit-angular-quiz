@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "bit-quiz-angular": {
+      "hosting": {
+        "quiz": [
+          "bit-quiz-angular"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "bit-quiz-angular"
+  }
+}
