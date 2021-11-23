@@ -4,7 +4,7 @@
       <div class="col-12 quiz-wrapper">
         <div class="row">
           <!-- Boostrap column offset: https://getbootstrap.com/docs/5.0/layout/columns/#offsetting-columns  -->
-          <div class="col-sm-6 offset-sm-3">
+          <div class="col-lg-6 offset-lg-3">
             <!-- Quiz Title -->
             <div class="quiz-title text-center">
               <div class="quiz-title__subtitle">Question 1</div>
@@ -18,9 +18,9 @@
           </div>
 
           <!-- Quiz Answers -->
-          <div class="col-8 offset-2">
+          <div class="col-lg-8 offset-lg-2">
             <div class="row">
-              <div class="col-6 mb-3 quiz-answer" [class.selected]="item.key == '1'"
+              <div class="col-sm-6 mb-3 quiz-answer" [class.selected]="item.key == '1'"
                 *ngFor="let item of answers | keyvalue">
                 <div class="card" [class.shadow]="item.key == '1'">
                   <div class="card-body d-flex flex-nowrap align-items-center">
