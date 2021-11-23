@@ -11,9 +11,9 @@ import { provideDatabase,getDatabase } from '@angular/fire/database';
 
 /* Angular Fire Modulio importavimas */
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { environment } from 'src/environments/environment';
 
-import { environment } from '../environments/environment';
 
 
 
@@ -27,7 +27,7 @@ import { environment } from '../environments/environment';
     BrowserAnimationsModule,
     ProgressbarModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabase
+    AngularFireDatabaseModule
   ],
   providers: [],
   bootstrap: [AppComponent]
