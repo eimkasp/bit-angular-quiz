@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ export class AppComponent {
     "Atsakymas 4",
   ];
 
-  constructor() {
-
+  constructor(private db: AngularFirestore) {
+    const things = db.collection('quizes').doc('I4sClmfgnkkThp84dTAv').collection('answers').valueChanges();
+    things.subscribe(console.log);
   }
 }
