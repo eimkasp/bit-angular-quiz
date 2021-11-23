@@ -17,6 +17,7 @@ body {
 }
 
 .text {
+
   // Sugeneruojama: .text-red
   &-red {
     color: $color-red;
@@ -46,6 +47,7 @@ body {
 }
 
 .quiz-title {
+
   /* Ši dalis sugeneruos css klase: .quiz-title__subtitle */
   &__subtitle {
     color: $color-red;
@@ -58,6 +60,7 @@ body {
 
 .quiz-answer {
   cursor: pointer;
+
   &__number {
     font-size: 30px;
     width: 50px;
@@ -67,6 +70,7 @@ body {
     background: $white;
     font-weight: 700;
   }
+
   &__text {
     font-size: 23px;
     font-weight: 600;
@@ -81,5 +85,49 @@ body {
     .card {
       background: $color-red;
     }
+  }
+}
+
+.quiz-answers-container {
+  /*
+  TODO: Kaip padaryti, kad tai butu dinamine reiksme
+  priklausoma nuo .quiz-actions aukscio
+  */
+
+  /*
+  Boostrap responsive breakpoints dokumentacija:
+  https://getbootstrap.com/docs/5.0/layout/breakpoints/
+
+
+  Daugiau apie SCSS mixins:
+  https://glennmccomb.com/articles/useful-sass-scss-media-query-mixins-for-bootstrap/
+
+  */
+  /*
+  Šis užrašymas sugeneruos:
+  @media (min-width: 768px) { ... }
+  */
+  @include media-breakpoint-down(md) {
+    padding-bottom: 250px;
+  }
+}
+
+.quiz-actions {
+  background: $color-gray;
+  padding: 20px 30px;
+  width: 90%;
+  margin: 0 auto;
+  position: fixed;
+  bottom: 0;
+  left: 5%;
+
+  &__icon {
+    position: absolute;
+    left: 0;
+    bottom: 100%;
+  }
+
+  .btn {
+    font-size: 18px;
   }
 }
