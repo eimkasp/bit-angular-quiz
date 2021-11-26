@@ -3,6 +3,20 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
+
+class Answer {
+  correct: boolean = false;
+  title: string = ""
+}
+
+interface AnswerInterface {
+  value: {
+    title: string,
+    correct: boolean
+  },
+  key: string
+}
+
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
@@ -10,7 +24,7 @@ import { Observable } from 'rxjs';
 })
 export class QuizComponent implements OnInit {
   public title = 'quiz';
-  public answers: Array<any> = [];
+  public answers: Array<Answer> = [];
 
   public quizId: string | null;
   public quiz: any = {};
@@ -22,6 +36,25 @@ export class QuizComponent implements OnInit {
 
   // Kintamasis saugoti kiek % klausimu yra atsakyta
   public progress: number = 0;
+
+  public selectedAnswerKey: any = null;
+  public selectedAnswerObj: AnswerInterface = {
+    key: "",
+    value: {
+      title: "",
+      correct: false
+    }
+  };
+  public selectedQuestionKey: string = '';
+
+  // Kintamasis, kuriame saugome vartotojo pasirinktus atsakymus
+  public userAnswers: Array<any> = [];
+
+  public showResults: boolean = false;
+
+  public userScore : number = 0;
+
+  public questionCount : number = 0;
 
   constructor(db: AngularFireDatabase,
     private route: ActivatedRoute,
@@ -42,23 +75,99 @@ export class QuizComponent implements OnInit {
     });
   }
 
+  ngOnInit(): void {
+  }
+
   nextQuestion() {
+
+    // Issaugoti vartotojo pasirinkima cia
+    let userAnswer = {
+      "questionKey": this.selectedQuestionKey,
+      "answerKey": this.selectedAnswerKey,
+      "correct": this.selectedAnswerObj.value.correct
+    }
+
     this.currentQuestion++;
+    this.userAnswers.push(userAnswer);
     this.countProgress();
+
+    console.log("Selected answer obj:")
+    console.log(this.selectedAnswerObj);
+
+    let foundAnswer = false;
+    let foundId = 0;
+    /* Patikriname ar masyve toks atsakymas dar neirasytas */
+    /*  for(let i = 0; i < this.userAnswers.length; i++) {
+       if(this.userAnswers[i].questionKey == userAnswer.questionKey) {
+         // Radau egzistuojanti atsakymo irasa
+         foundAnswer = true;
+         foundId = i;
+       }
+     }
+
+     if(foundAnswer) {
+       this.userAnswers[foundId] = userAnswer;
+     } else {
+     } */
+
+
+    console.log("Vartotojo atsakymai: userAnswers kintamasis");
+    console.log(this.userAnswers);
   }
 
   previousQuestion() {
     this.currentQuestion--;
+    this.userAnswers.pop();
     this.countProgress();
+    // Pasalinu paskutini masyvo elementa
+    console.log(this.userAnswers);
   }
 
   countProgress() {
     let questionsCount = Object.keys(this.quizQuestions).length;
     this.progress = (this.currentQuestion) / questionsCount * 100;
     console.log("Progress: " + this.progress);
+
+    if (this.progress === 100) {
+      // Jei progresas yra 100% rodome results puslapi
+      this.showResults = true;
+      // Rezultato skaiciavimas
+      this.userScore = this.countResult();
+    }
   }
 
-  ngOnInit(): void {
+  /* Funckija kuri pereina per visus atsakymus ir susumuoja teisingai pasirinktus atsakymus */
+  countResult() {
+    console.log(this.userAnswers);
+    let score = 0;
+    this.questionCount = 0;
+    for (let i = 0; i < this.userAnswers.length; i++) {
+      if (this.userAnswers[i].correct) {
+        score++;
+      }
+      this.questionCount++;
+    }
+
+    return score;
   }
+
+  userSelectedAnswer(question: any, answer: any) {
+    // console.log("Question", question);
+    // console.log("Answer", answer);
+    /* Palyginame dabartini pasirinkima su pries tai buvusiu pasirinkimu  */
+    if (this.selectedAnswerKey == answer.key) {
+      // Jei pasirinkome ta pati klausima, selectedAnswerKey nustatome null
+      // Tai ledzia mums igyvendinti toggle funkcionaluma
+      this.selectedAnswerKey = null;
+    } else {
+      this.selectedAnswerKey = answer.key;
+      answer.value.correct;
+    }
+
+    this.selectedQuestionKey = question.key;
+    this.selectedAnswerObj = answer;
+  }
+
+
 
 }
