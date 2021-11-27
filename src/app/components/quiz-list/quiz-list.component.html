@@ -9,9 +9,13 @@
         <div class="card-body">
           {{ quiz.value.title }}
         </div>
-        <div class="card-footer">
+        <div class="card-footer ">
           <a class="btn btn-success" routerLink="/quiz/{{ quiz.key }}">
             Go To Quiz
+          </a>
+
+          <a class="btn btn-info text-white ms-3" routerLink="/quiz/{{ quiz.key }}/edit">
+            Edit Quiz
           </a>
         </div>
       </div>

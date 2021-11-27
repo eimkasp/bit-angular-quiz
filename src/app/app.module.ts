@@ -17,6 +17,7 @@ import { QuizListComponent } from './components/quiz-list/quiz-list.component';
 import { QuizComponent } from './components/quiz/quiz.component';
 import { QuizCreateComponent } from './components/quiz-create/quiz-create.component';
 import { FormsModule } from '@angular/forms';
+import { QuizEditComponent } from './components/quiz-edit/quiz-edit.component';
 
 
 
@@ -26,7 +27,8 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     QuizListComponent,
     QuizComponent,
-    QuizCreateComponent
+    QuizCreateComponent,
+    QuizEditComponent
   ],
   imports: [
     BrowserModule,
