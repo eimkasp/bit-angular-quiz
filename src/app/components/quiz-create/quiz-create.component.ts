@@ -24,7 +24,11 @@ export class QuizCreateComponent implements OnInit {
     console.log(this.quiz);
     // Validacija
 
+    /* Pridėjimui naudojame list funkcija is firebase
+    nes tik ji turi push galimybe prideti duomenims prie jau esamu duomenu
+    https://github.com/angular/angularfire/blob/master/docs/rtdb/lists.md#adding-new-items
 
+    */
     const itemsRef = this.db.list('quizes');
     itemsRef.push(this.quiz).then(function() {
       alert("Quiz Sekmingai Sukurtas");
